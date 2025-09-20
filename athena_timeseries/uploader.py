@@ -11,8 +11,14 @@ def upload(
     s3_path: str,
     table_name: str,
     df: pd.DataFrame,
+    revers: bool,
     dtype: Optional[Dict[str, str]] = None,
 ):
+    partition_cols=["partition_dt", "symbol"]
+    if revers:
+        # revers partition
+        partition_cols=partition_cols[::-1]
+
     _dtype = {
         "partition_dt": "date",
         "dt": "timestamp",
@@ -29,7 +35,7 @@ def upload(
 
     return awswrangler.s3.to_parquet(
         df=df,
-        partition_cols=["partition_dt", "symbol"],
+        partition_cols=partition_cols,
         dataset=True,
         database=glue_db_name,
         table=table_name,
