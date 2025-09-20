@@ -75,6 +75,7 @@ class AthenaTimeSeries:
         *,
         table_name: str,
         df: pd.DataFrame,
+        reversed: bool = False,
         dtype: Optional[Dict[str, str]] = None,
     ):
         return upload(
@@ -83,5 +84,6 @@ class AthenaTimeSeries:
             s3_path=self.s3_path,
             table_name=table_name,
             df=df,
+            reversed=reversed,
             dtype=dtype,
         )

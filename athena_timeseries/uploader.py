@@ -11,12 +11,12 @@ def upload(
     s3_path: str,
     table_name: str,
     df: pd.DataFrame,
-    revers: bool,
+    reversed: bool,
     dtype: Optional[Dict[str, str]] = None,
 ):
     partition_cols=["partition_dt", "symbol"]
-    if revers:
-        # revers partition
+    if reversed:
+        # reversed partition
         partition_cols=partition_cols[::-1]
 
     _dtype = {
