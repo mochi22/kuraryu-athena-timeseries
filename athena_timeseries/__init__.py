@@ -84,7 +84,6 @@ class AthenaTimeSeries:
             s3_path=self.s3_path,
             table_name=table_name,
             df=df,
-            reversed=reversed,
             dtype=dtype,
             concurrent_partitioning=concurrent_partitioning
         )
