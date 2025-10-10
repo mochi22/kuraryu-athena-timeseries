@@ -11,13 +11,10 @@ def upload(
     s3_path: str,
     table_name: str,
     df: pd.DataFrame,
-    reversed: bool,
     dtype: Optional[Dict[str, str]] = None,
+    concurrent_partitioning: bool
 ):
     partition_cols=["partition_dt", "symbol"]
-    if reversed:
-        # reversed partition
-        partition_cols=partition_cols[::-1]
 
     _dtype = {
         "partition_dt": "date",
@@ -42,6 +39,6 @@ def upload(
         path=f"{s3_path}/{table_name}",
         boto3_session=boto3_session,
         mode="overwrite_partitions",
-        concurrent_partitioning=True,
+        concurrent_partitioning=concurrent_partitioning,
         dtype=_dtype,
     )

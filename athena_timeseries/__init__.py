@@ -75,8 +75,8 @@ class AthenaTimeSeries:
         *,
         table_name: str,
         df: pd.DataFrame,
-        reversed: bool = False,
         dtype: Optional[Dict[str, str]] = None,
+        concurrent_partitioning: bool = True
     ):
         return upload(
             boto3_session=self.boto3_session,
@@ -86,4 +86,5 @@ class AthenaTimeSeries:
             df=df,
             reversed=reversed,
             dtype=dtype,
+            concurrent_partitioning=concurrent_partitioning
         )
